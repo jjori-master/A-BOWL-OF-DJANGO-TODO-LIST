@@ -1,0 +1,5 @@
+echo "python pyenv > todo_list_env 진입"
+
+pyenv shell todo_list_env
+
+pyenv activate
