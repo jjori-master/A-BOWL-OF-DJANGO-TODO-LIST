@@ -212,5 +212,49 @@ exec $SHELL
       pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
       ```
 
-      
+- 장고 어플리케이션 시작(?)
 
+  > ```bash
+  > $> python -m pip install Django 
+  > $> django-admin startproject todo_list
+  > $> cd todo_list
+  > $> python manage.py runserver
+  > ```
+  >
+  > 이전에 프로젝트 생성 후 바로 실행했었다. 프로젝트 생성시 `todo_list`이름의 폴더가 생성되고 그안에 다시 `todo_list`이름의 폴더와 `manage.py`가 생성되었다.
+  >
+  >
+  > 다른 책에서는 프로젝트 이름과 기본으로 생성된 폴더 이름이 동일한것이 혼동을 준다고 해서
+  > 아래 `todo_list` 폴더를 다른 이름으로 변경 했던걸로 기억한다.
+  >
+  >
+  > 우선 그대로 진행 해보자
+  > 내부 `todo_list` 폴더중 setting.py 파일에 기본 생성된 설정 정보가 있으며
+  >
+  >
+  > 더 자세히 보고 싶은 경우에는 파일 내부 상단 주석으로 처리된 공식 메뉴얼 정보를 참조하면 된다.
+  >
+  >
+  > 하나의 프로젝트는 여러개의 `Application`으로 구성되며 아래와 같이 `manage.py`파일이 있는 곳에서 명령어를 실행하여 생성할 수 있다.
+  >
+  > ```bash
+  > $> python manage.py startapp my_to_do_app
+  > ```
+  >
+  > 새로 app 생성시 마다 
+  > 프로젝트 폴더 > settings.py의 INSTALL_APPS 리스트에 app 이름을 추가해준다.
+  >
+  > ```python
+  > ....
+  > 
+  > INSTALLED_APPS = [
+  >     'django.contrib.admin',
+  >     'django.contrib.auth',
+  >     'django.contrib.contenttypes',
+  >     'django.contrib.sessions',
+  >     'django.contrib.messages',
+  >     'django.contrib.staticfiles',
+  >     'my_to_do_app\',
+  > ]
+  > ....
+  > ```
