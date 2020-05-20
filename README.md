@@ -223,38 +223,55 @@ exec $SHELL
   >
   > 이전에 프로젝트 생성 후 바로 실행했었다. 프로젝트 생성시 `todo_list`이름의 폴더가 생성되고 그안에 다시 `todo_list`이름의 폴더와 `manage.py`가 생성되었다.
   >
-  >
-  > 다른 책에서는 프로젝트 이름과 기본으로 생성된 폴더 이름이 동일한것이 혼동을 준다고 해서
+  >다른 책에서는 프로젝트 이름과 기본으로 생성된 폴더 이름이 동일한것이 혼동을 준다고 해서
   > 아래 `todo_list` 폴더를 다른 이름으로 변경 했던걸로 기억한다.
+  > 
   >
-  >
-  > 우선 그대로 진행 해보자
+  >우선 그대로 진행 해보자
   > 내부 `todo_list` 폴더중 setting.py 파일에 기본 생성된 설정 정보가 있으며
+  > 
   >
+  >더 자세히 보고 싶은 경우에는 파일 내부 상단 주석으로 처리된 공식 메뉴얼 정보를 참조하면 된다.
+  > 
   >
-  > 더 자세히 보고 싶은 경우에는 파일 내부 상단 주석으로 처리된 공식 메뉴얼 정보를 참조하면 된다.
-  >
-  >
-  > 하나의 프로젝트는 여러개의 `Application`으로 구성되며 아래와 같이 `manage.py`파일이 있는 곳에서 명령어를 실행하여 생성할 수 있다.
-  >
-  > ```bash
+  >하나의 프로젝트는 여러개의 `Application`으로 구성되며 아래와 같이 `manage.py`파일이 있는 곳에서 명령어를 실행하여 생성할 수 있다.
+  > 
+  >```bash
   > $> python manage.py startapp my_to_do_app
   > ```
-  >
-  > 새로 app 생성시 마다 
+  > 
+  >새로 app 생성시 마다 
   > 프로젝트 폴더 > settings.py의 INSTALL_APPS 리스트에 app 이름을 추가해준다.
-  >
-  > ```python
+  > 
+  >```python
   > ....
   > 
   > INSTALLED_APPS = [
-  >     'django.contrib.admin',
+  >  'django.contrib.admin',
   >     'django.contrib.auth',
   >     'django.contrib.contenttypes',
   >     'django.contrib.sessions',
   >     'django.contrib.messages',
   >     'django.contrib.staticfiles',
   >     'my_to_do_app\',
-  > ]
+  >    ]
   > ....
+  > 
   > ```
+
+
+
+###### 주의사항
+
+- `Django can't redirect to the slash URL while maintaining POST data. `
+
+  > [해당 내용 풀이](http://codingdojang.com/scode/377)
+  > 장고의 `APPEND_SLASH`는 자동으로 URL 끝에 슬래시('/')를 붙여주는 옵션(Default=Ture)
+  >
+  > 위의 내용이 발생되는 원인은 Django가 urls.py 파일에 정의된 패턴과 일치하는 것이 없을때 자동으로 붙여서 다시 한번 일치하는지 확인하는데
+  >
+  > 일치하는 경우에는 슬래시를 붙인 url로 redirect가 일어난다.
+  > 문제는 POST 요청일 경우 redirct가 발생되면 submit된 데이터가 유실될 수도 있기 때문에
+  > 해당 오류가 발생된다.
+  >
+  > form에서 사용되는 url의 경우 끝에 슬래시('/')를 붙여준다.
