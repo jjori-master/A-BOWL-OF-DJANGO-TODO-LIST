@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from .models import * 
 
 # Create your views here.
 def index(request):
@@ -7,4 +9,8 @@ def index(request):
 
 def createTodo(request):
     user_input_str = request.POST['todoContent']
-    return HttpResponse(f'create Todo를 할거야! => {user_input_str}')
+
+    new_todo = Todo(content=user_input_str)
+    new_todo.save()
+
+    return HttpResponseRedirect(reverse('index'))
