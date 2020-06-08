@@ -61,14 +61,23 @@
   pyenv activate
   ```
 
-- 프로젝트 폴더 입장 후 vscode 실행
+- 프로젝트 폴더 입장 후 다시 Django 설치
+
+  > virtualenv를 통해 독립된 가상환경이므로 다시 Django를 설치 해줘야 한다.
 
   ```bash
   $> cd todo_list
-  $> code .
+  $> pip install --upgrade pip
+  $> python -m pip install Django
   ```
 
+- 서버 구동
 
+  ```bash
+  $> python manage.py runserver
+  ```
+
+  
 
 ##### 어플리케이션 생성 및 등록
 
