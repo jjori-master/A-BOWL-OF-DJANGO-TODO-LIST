@@ -13,4 +13,5 @@ def createTodo(request):
     new_todo = Todo(content=user_input_str)
     new_todo.save()
 
+    # my_to_do_app/urls.py 내 index로 이름이 된 path로 redirect 한다.
     return HttpResponseRedirect(reverse('index'))
