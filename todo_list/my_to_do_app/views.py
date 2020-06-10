@@ -18,3 +18,13 @@ def createTodo(request):
 
     # my_to_do_app/urls.py 내 index로 이름이 된 path로 redirect 한다.
     return HttpResponseRedirect(reverse('index'))
+
+def deleteTodo(request):
+    todo_num = request.GET['todoNum']
+
+    print(f'완료한 todo의 id는 {todo_num}')
+    del_target_todo = Todo.objects.get(id = todo_num)
+    del_target_todo.delete()
+
+    # my_to_do_app/urls.py 내 index로 이름이 된 path로 redirect 한다.
+    return HttpResponseRedirect(reverse('index'))
